@@ -104,6 +104,7 @@ def compute_eer(config, model):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('-w', '--weight', type=str, required=True)
     parser.add_argument(
         '-c', '--config', type=str, required=False, default='config.yaml')
     parser.add_argument(
@@ -111,7 +112,7 @@ if __name__ == '__main__':
         '--device',
         default="gpu",
         help="Select which device to train model, defaults to gpu.")
-    parser.add_argument('-w', '--weight', type=str, required=True)
+    parser.add_argument('--test_folder', type=str, required=False)
     args = parser.parse_args()
 
     with open(args.config) as f:
@@ -119,6 +120,9 @@ if __name__ == '__main__':
     paddle.set_device(args.device)
     logger.info('model:' + config['model']['name'])
     logger.info('device: ' + args.device)
+
+    if args.test_folder is not None:
+        config['test_folder'] = args.test_folder
 
     logger.info(f'using ' + config['model']['name'])
     ModelClass = eval(config['model']['name'])

@@ -10,9 +10,11 @@ The networks we support here are
 Install the requirements via
 ```
 # install paddleaudio
-git clone https://github.com/PaddlePaddle/models.git
-cd models/PaddleAudio
+git clone https://github.com/PaddlePaddle/models.git --branch develop PaddleModels
+source venv/bin/activate
+cd PaddleModels/PaddleAudio
 pip install -e .
+cd ../..
 ```
 Then clone this project,
 ```
